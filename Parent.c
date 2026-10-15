@@ -9,7 +9,7 @@ int main(){
 
     printf("Enter file name: ");
 
-    if (!scanf("%255s", filename)){
+    if (scanf("%255s", filename) != 1){
         perror("read filename");
         return -1;
     }

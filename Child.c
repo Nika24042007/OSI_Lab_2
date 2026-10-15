@@ -4,17 +4,24 @@
 #include "sys/wait.h"
 
 int main(){
-    int a, b, c;
-
-    while(scanf("%d %d %d\n", &a, &b, &c) == 3){
-        if(b == 0 || c == 0){
-            printf("Division by 0\n");
-            return -1;
+    char line[4096];
+    while (fgets(line, sizeof(line), stdin)){
+        char *p = line;
+        int num, res, f;
+        if (sscanf(p, "%d%n", &res, &f) != 1){
+            continue;
         }
-        else{
-            int n = a/b;
-            printf("%d\n", n/c);
+        p += f;
+        while (sscanf(p, "%d%n", &num, &f) == 1){
+            if(num == 0){
+                printf("Divsion by 0\n");
+                return -1;
+            }else{
+                res = res/num;
+            }
+            p += f;
         }
+        printf("%d\n", res);
     }
     return 0;
 }
